@@ -17,7 +17,6 @@ Test Device: Apple Macbook Pro (M1)
 ![GETCONF response from booking-loco.kakao.com](static/GETCONF_booking.png)
 
 - Receive data from "booking-loco.kakao.com" using the LOCO protocol (unencrypted packets)
-- "kakao-impl-cpp(cpp-kakao)" is a LOCO protocol library that implements most of the features of KakaoTalk, currently under development and planned to be released by August 2023.
 
 # To-Do
 
