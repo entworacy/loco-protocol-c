@@ -16,7 +16,7 @@ Test Device: Apple Macbook Pro (M1)
 
 ![GETCONF response from booking-loco.kakao.com](static/GETCONF_booking.png)
 
-- Receive data from "booking-loco.kakao.com" using the LOCO protocol (unencrypted packets)
+- Receive data using the LOCO protocol (unencrypted packets)
 
 # To-Do
 
