@@ -72,8 +72,3 @@ int init_packet(struct packet* packet) {
     memset(packet->method, '\0', sizeof(packet->method));
     return 0;
 }
-
-int main() {
-  printf("hi");
-  return 0;
-}

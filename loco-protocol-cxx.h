@@ -36,20 +36,31 @@ struct secure_handshake_packet {
 int serialize_handshake_packet(struct secure_handshake_packet *handshake_packet, char *buffer);
 int serialize_packet(struct packet *packet, char *buffer);
 
-struct secure_handshake_packet *deserialize_handshake_packet(char *bytes);
+/**
+ * THIS FUNCTION IS CURRENTLY NOT IMPLEMENTED
+ * 
+ * I don't think the server will return "secure_handshake_packet" to the client.
+ * This is because the definition of Handshake Packet is like that.
+ * However, we plan to implement deserialization of "secure_handshake_packet" in the near future as well.
+ * Currently, there are many features that need to be added first,
+ * so we ask for your patience if you are waiting for deserialization.
+ */
+__attribute__((unused)) struct secure_handshake_packet *deserialize_handshake_packet(char *bytes);
+
 struct packet *deserialize_packet(char *bytes);
 
 int init_packet(struct packet *packet);
 
-CRYPTO_RESULT __ENC_generate_randomic_aes_key(char *aes_key_cursor) {
+CRYPTO_RESULT __ENC_generate_randomic_aes_key(unsigned char *aes_key_cursor) {
   if(RAND_bytes(aes_key_cursor, AES_KEY_LENGTH) != 1)
     return RANDOM_FAILED;
   return SUCCESS;
 }
 
-void __ENC_encrypt_aes_cbc(const unsigned char *aes_key, char *target, char *encrypted_data, size_t size) {
+void __ENC_encrypt_aes_cbc(const unsigned char *aes_key, const unsigned char *target,
+    unsigned char *encrypted_data, size_t size) {
   AES_KEY key;
-  AES_set_encrypt_key(aes_key, AES_KEY_LENGTH * 8, &key);
+  AES_set_encrypt_key(aes_key, AES_BLOCK_SIZE / 8, &key);
   unsigned char iv[AES_BLOCK_SIZE];
   if(RAND_bytes(iv, sizeof(iv)) != 1)
     printf("RAND_bytes -> iv error"); // TODO
