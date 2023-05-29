@@ -1,5 +1,9 @@
 #include "loco-protocol-cxx.h"
 
+/// @brief Serializes the 'packet' Struct into bytes that can be sent over the network.
+/// @param packet 
+/// @param bytes 
+/// @return Byte length of converted packet
 int serialize_packet(struct packet *packet, char *bytes) {
   int bytes_written = 0;
 
@@ -23,8 +27,27 @@ int serialize_packet(struct packet *packet, char *bytes) {
   return bytes_written;
 }
 
-struct packet *deserialize_packet(const char *bytes) {
+int serialize_handshake_packet(struct secure_handshake_packet *packet, char *bytes) {
+  int bytes_written = 0;
+
+  uint32_t encrypted_data_length = packet->encrypted_data_length;
+  memcpy(bytes + bytes_written, &encrypted_data_length, sizeof(uint32_t));
+  bytes_written += sizeof(uint32_t);
+  uint32_t handshake_type = packet->handshake_type;
+  memcpy(bytes + bytes_written, &handshake_type, sizeof(uint32_t));
+  bytes_written += sizeof(uint32_t);
+  uint32_t encrypt_type = packet->encrypt_type;
+  memcpy(bytes + bytes_written, &encrypt_type, sizeof(uint32_t));
+  bytes_written += sizeof(uint32_t);
+  memcpy(bytes + bytes_written, packet->encrypted_data, packet->encrypted_data_length);
+  bytes_written += packet->encrypted_data_length;
+
+  return bytes_written;
+}
+
+struct packet *deserialize_packet(char *bytes) {
   struct packet *packet = (struct packet *)malloc(sizeof(struct packet));
+  if(init_packet(packet) < 0) return NULL;
   if (packet == NULL) {
     return NULL;
   }
@@ -48,4 +71,9 @@ int init_packet(struct packet* packet) {
     if(packet == NULL) return -1;
     memset(packet->method, '\0', sizeof(packet->method));
     return 0;
+}
+
+int main() {
+  printf("hi");
+  return 0;
 }

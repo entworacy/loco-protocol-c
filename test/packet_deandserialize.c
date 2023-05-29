@@ -1,12 +1,5 @@
 #include "loco-protocol-cxx.h"
 
-void PrintPacketBytes(const char *bytes, int size) {
-  int i;
-  for (i = 0; i < size; i++) {
-    printf("\\%02x ", bytes[i]);
-  }
-  printf("\n");
-}
 int main() {
     struct packet packet;
     int result = init_packet(&packet);
@@ -26,13 +19,10 @@ int main() {
     
     char buffer[4000];
     int b_wri = serialize_packet(&packet, buffer);
-
-    PrintPacketBytes(buffer, b_wri);
-
     struct packet* pack = deserialize_packet(buffer);
     
     printf("Packet ID: %d\n", pack->packet_id);
 
     free(packet.body);
-    return 0x08;
+    return 0;
 }

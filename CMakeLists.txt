@@ -1,9 +1,12 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(loco-protocol-c VERSION 0.1.0)
 
+find_package(OpenSSL REQUIRED)
 add_subdirectory(test)
 
 add_library(loco-protocol-c SHARED loco-protocol-cxx.h loco-protocol-cxx.c)
+
+target_link_libraries(loco-protocol-c OpenSSL::SSL OpenSSL::Crypto)
 
 
 include(CTest)

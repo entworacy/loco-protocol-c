@@ -22,12 +22,12 @@ Test Device: Apple Macbook Pro (M1)
 # To-Do
 
 - [x] Loco Default(non-secure) Packet
-- [ ] Loco Secure Packet
+- [x] Loco Secure Packet (**Working**)
 - [ ] Default SSL TCP Socket
 
 # How to Build
 
-To use the Loco protocol security layer features of this library, you need to install OpenSSL. (Handshake, Secure Packet, etc...)
+To use the Loco protocol features of this library, you need to install OpenSSL. (Handshake, Secure Packet, etc...)
 
 # License
 
