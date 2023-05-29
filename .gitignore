@@ -1,0 +1,6 @@
+# Default config file directories
+
+build/
+.vscode/
+CMakeFiles/
+.git/
