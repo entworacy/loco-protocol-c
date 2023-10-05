@@ -2,6 +2,9 @@
 
 Loco protocol de/serializer written in C
 
+Contains the VoiceTalk VOIP function implementation. (VoIP via FaceTalk is not planned to be implemented)
+
+
 **This project is under development.**
 
 # Test
