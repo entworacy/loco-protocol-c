@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <openssl/rand.h>
-#include <openssl/aes.h>
-
 const int AES_KEY_LENGTH = 128 / 8; // AES-KEY LENGTH
 
 typedef enum _CRYPTO_MODULE_RESULT {
@@ -50,19 +47,3 @@ __attribute__((unused)) struct secure_handshake_packet *deserialize_handshake_pa
 struct packet *deserialize_packet(char *bytes);
 
 int init_packet(struct packet *packet);
-
-CRYPTO_RESULT __ENC_generate_randomic_aes_key(unsigned char *aes_key_cursor) {
-  if(RAND_bytes(aes_key_cursor, AES_KEY_LENGTH) != 1)
-    return RANDOM_FAILED;
-  return SUCCESS;
-}
-
-void __ENC_encrypt_aes_cbc(const unsigned char *aes_key, const unsigned char *target,
-    unsigned char *encrypted_data, size_t size) {
-  AES_KEY key;
-  AES_set_encrypt_key(aes_key, AES_BLOCK_SIZE / 8, &key);
-  unsigned char iv[AES_BLOCK_SIZE];
-  if(RAND_bytes(iv, sizeof(iv)) != 1)
-    printf("RAND_bytes -> iv error"); // TODO
-  AES_cbc_encrypt(target, encrypted_data, size, &key, iv, AES_ENCRYPT);
-}

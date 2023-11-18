@@ -1,4 +1,4 @@
-#include "loco-protocol-cxx.h"
+#include "../../loco-protocol-cxx.h"
 
 int main() {
     struct packet packet;

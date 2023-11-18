@@ -4,6 +4,7 @@ build/
 .vscode/
 CMakeFiles/
 .git/
+Makefile
 
 # MacOS Finder Cache
 .DS_Store
