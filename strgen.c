@@ -36,7 +36,7 @@ int make_xvc_key(char *target, char *ua, char *email)
             sprintf(temp, "%02x", splitted[i] & 0xFF);
             strcat(target, temp);
         } 
-
+        free(transfer_text);
         return strlen(target);
     } else
         return 0;
