@@ -1,4 +1,5 @@
 #include "../../loco-protocol-cxx.h"
+#include "../../loco-packet-generator.h"
 
 int main() {
     struct packet packet;
@@ -16,13 +17,21 @@ int main() {
     packet.body_length = 13;
     packet.body = (char*) malloc(packet.body_length); //sizeof(char) == 1
     strcpy(packet.body, "Hello, World"); //strncpy ??
+
+
     
     char buffer[4000];
     int b_wri = serialize_packet(&packet, buffer);
     struct packet* pack = deserialize_packet(buffer);
     
     printf("Packet ID: %d\n", pack->packet_id);
-
     free(packet.body);
+
+    LOCO_PACKET_CTX *ctx = packet_generator_init();
+    BSON_APPEND_UTF8(&ctx->bson_data, "MCCMNC", "310260");
+    BSON_APPEND_UTF8(&ctx->bson_data, "os", "android");
+    BSON_APPEND_UTF8(&ctx->bson_data, "model", "SMT975N_31");
+    struct packet *packed = make_default_loco_packet(ctx, "GETCONF");
+    
     return 0;
 }

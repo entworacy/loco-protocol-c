@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-const int AES_KEY_LENGTH = 128 / 8; // AES-KEY LENGTH
+static const int AES_KEY_LENGTH = 128 / 8; // AES-KEY LENGTH
 
 typedef enum _CRYPTO_MODULE_RESULT {
   RANDOM_FAILED = -4,
