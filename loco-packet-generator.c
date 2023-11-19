@@ -46,5 +46,6 @@ struct packet *make_default_loco_packet(LOCO_PACKET_CTX *ctx, char *method)
     }
     protocol_default_packet->status_code = 0;
     protocol_default_packet->body_type = 0;
+    bson_free(bson_bytes);
     return protocol_default_packet;
 }
